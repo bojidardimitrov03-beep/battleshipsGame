@@ -13,5 +13,9 @@ class Gameboard {
       this.missedAttacks.push([row, col]);
     }
   }
+  areAllShipsSunk() {
+    const ships = this.board.flat().filter(cell => cell !== null);
+    return ships.every(ship => ship.isSunk());
+  }
 }
 export default Gameboard;
