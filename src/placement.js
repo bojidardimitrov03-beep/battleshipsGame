@@ -170,14 +170,7 @@ const clearHighlights = () => {
   });
 };
 
-const isValidPlacement = (row, col, length, vertical, gameboard) => {
-  for (let i = 0; i < length; i++) {
-    const r = vertical ? row + i : row;
-    const c = vertical ? col : col + i;
-    if (r >= 10 || c >= 10) return false;
-    if (gameboard.board[r][c] !== null) return false;
-  }
-  return true;
-};
+const isValidPlacement = (row, col, length, vertical, gameboard) =>
+  gameboard.isValidShipPlacement(row, col, length, vertical);
 
 export { setupPlacement };

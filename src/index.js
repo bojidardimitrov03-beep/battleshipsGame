@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const player = new Player('human');
   const computer = new Player('computer');
 
-  // Place computer ships randomly
+  // Place computer ships randomly (with 1-cell spacing between ships)
   const computerShips = [new Ship(4), new Ship(3), new Ship(3), new Ship(2)];
   computerShips.forEach(ship => {
     let placed = false;
@@ -16,11 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const row = Math.floor(Math.random() * 10);
       const col = Math.floor(Math.random() * 10);
       const vertical = Math.random() > 0.5;
-      try {
+      if (computer.gameboard.isValidShipPlacement(row, col, ship.length, vertical)) {
         computer.gameboard.placeShip(ship, [row, col], vertical);
         placed = true;
-      } catch {
-        placed = false;
       }
     }
   });
@@ -33,6 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const startGame = () => {
+    const gameOverEl = document.getElementById('game-over');
+    const gameOverMessage = document.getElementById('game-over-message');
+    const replayBtn = document.getElementById('replay-btn');
+
+    const showGameOver = (message) => {
+      gameOverMessage.textContent = message;
+      gameOverEl.classList.remove('hidden');
+    };
+
+    replayBtn.addEventListener('click', () => {
+      location.reload();
+    });
+
     const renderAll = () => {
       renderBoard(player.gameboard, 'player-board', false);
       renderBoard(computer.gameboard, 'enemy-board', true);
@@ -51,9 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAll();
 
         if (computer.gameboard.areAllShipsSunk()) {
-          alert('You win!');
+          showGameOver('You win!');
         } else if (player.gameboard.areAllShipsSunk()) {
-          alert('Computer wins!');
+          showGameOver('Computer wins!');
         }
       });
     };
