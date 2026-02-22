@@ -6,15 +6,29 @@
   </head>
   <body>
     <h1>Battleship</h1>
-
-    <div id="game">
-      <div class="board-container">
-        <h2>Your Board</h2>
-        <div id="player-board"></div>
+  
+    <div id="setup-phase">
+      <h2>Place Your Ships</h2>
+      <button id="rotate-btn">Rotate (Horizontal)</button>
+      <div id="ship-dock">
+        <div class="dock-ship" draggable="true" data-length="4">Ship (4)</div>
+        <div class="dock-ship" draggable="true" data-length="3">Ship (3)</div>
+        <div class="dock-ship" draggable="true" data-length="3">Ship (3)</div>
+        <div class="dock-ship" draggable="true" data-length="2">Ship (2)</div>
       </div>
-      <div class="board-container">
-        <h2>Enemy Board</h2>
-        <div id="enemy-board"></div>
+      <div id="placement-board"></div>
+    </div>
+  
+    <div id="game-phase" style="display:none">
+      <div id="game">
+        <div class="board-container">
+          <h2>Your Board</h2>
+          <div id="player-board"></div>
+        </div>
+        <div class="board-container">
+          <h2>Enemy Board</h2>
+          <div id="enemy-board"></div>
+        </div>
       </div>
     </div>
   </body>

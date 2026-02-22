@@ -41,3 +41,37 @@
   .cell.hit { background-color: red; }
   .cell.miss { background-color: lightblue; }
   .cell.ship { background-color: gray; }
+
+
+  #setup-phase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  #ship-dock {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .dock-ship {
+    padding: 10px;
+    background: gray;
+    color: white;
+    cursor: grab;
+    border-radius: 4px;
+  }
+  
+  .cell.highlight {
+    background-color: lightgreen;
+  }
+  
+  .cell.invalid {
+    background-color: salmon;
+  }
+  
+  #rotate-btn {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
