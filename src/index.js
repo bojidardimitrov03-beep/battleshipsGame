@@ -17,9 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
     renderBoard(player.gameboard, 'player-board', false);
     renderBoard(computer.gameboard, 'enemy-board', true);
     setupAttackListeners(computer.gameboard, (row, col) => {
+      const alreadyMissed = computer.gameboard.missedAttacks.some(
+        ([r, c]) => r === row && c === col
+      );
+      const alreadyHit = computer.gameboard.hitAttacks.some(
+        ([r, c]) => r === row && c === col
+      );
+
+      if (alreadyMissed || alreadyHit) return;
+
       player.attack(computer.gameboard, [row, col]);
       computer.computerAttack(player.gameboard);
       renderAll();
+
+      if (computer.gameboard.areAllShipsSunk()) {
+        alert('You win!');
+      } else if (player.gameboard.areAllShipsSunk()) {
+        alert('Computer wins!');
+      }
     });
   };
 
